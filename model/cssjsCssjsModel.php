@@ -131,7 +131,7 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
      * @access public
      * @return void
      */
-    public function register_css ($key, $src = null)
+    public function register_css ($key, $src)
     {
         return $this->register('css', $key, $src);
     }
@@ -144,7 +144,7 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
      * @access public
      * @return void
      */
-    public function register_js ($key, $src = null)
+    public function register_js ($key, $src)
     {
         return $this->register('js', $key, $src);
     }
@@ -157,7 +157,7 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
      * @access public
      * @return void
      */
-    public function register_head ($key, $src = null)
+    public function register_head ($key, $src)
     {
         return $this->register('heads', $key, $src);
     }
@@ -170,7 +170,7 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
      * @access public
      * @return void
      */
-    public function register_foot ($key, $src = null)
+    public function register_foot ($key, $src)
     {
         return $this->register('foots', $key, $src);
     }
@@ -251,16 +251,13 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
     /**
      * register 
      * 
-     * @param mixed $type : js, css, heads ou foots
+     * @param mixed $type : js ou css
      * @param mixed $key : index du tableau associatif dans lequel on enregistre la CSS ou le JS
-     * @param mixed $src : string, ou tableau contenant les attributs src, media, etc... du JS ou de la CSS.
-     *                     si ce parametre est vide ou que c'est un tableau dont $src['src'] n'est pas fourni, 
-     *                     la valeur manquante sera récupérée dans la Clementine::$config['module_cssjs-' . $type].
-     *                     Note : un chercher remplacer sur __WWW_ROOT__ sera alors effectué
+     * @param mixed $src : string, ou tableau contenant les attributs src, media, etc... du JS ou de la CSS
      * @access protected
      * @return void
      */
-    protected function register ($type, $key, $src = null)
+    protected function register ($type, $key, $src)
     {
         if ($type != 'css' && $type != 'js' && $type != 'heads' && $type != 'foots') {
             return false;
@@ -268,27 +265,6 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
         // on n'enregistre la CSS que si elle n'est pas deja enregistree, et si on a fourni une cle acceptable (c'est a dire un string) pour le tableau associatif Clementine::$register['cssjs'][$type]
         if (((string) $key) !== ((string) ((int) $key))) {
             if (!isset(Clementine::$register['cssjs'][$type][$key])) {
-                // si pas de parametre src fourni, on va chercher sa valeur dans la config du module cssjs
-                if ($src === null || (is_array($src) && !isset($src['src']))) {
-                    if (isset(Clementine::$config['module_cssjs-' . $type][$key])) {
-                        $config_src = Clementine::$config['module_cssjs-' . $type][$key];
-                        $config_src = str_replace('__WWW_ROOT__', __WWW_ROOT__, $config_src);
-                        if (!is_array($src)) {
-                            $src = array('src' => $config_src);
-                        } else {
-                            $src['src'] = $config_src;
-                        }
-                    } else {
-                        // missing param
-                        if (__DEBUGABLE__) {
-                            $this->getHelper('debug')->missing_param(array(
-                                'type'       => $type,
-                                'param_name' => 'src'
-                            ), debug_backtrace());
-                        }
-                        die();
-                    }
-                }
                 Clementine::$register['cssjs'][$type][$key] = $src;
             }
         } else {

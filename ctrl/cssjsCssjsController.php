@@ -20,11 +20,10 @@ class cssjsCssjsController extends cssjsCssjsController_Parent
      * @access public
      * @return void
      */
-    public function cssAction($request)
+    public function cssAction()
     {
-        // TODO
-        /*$all_css = $this->getModel('cssjs')->get_css();*/
-        /*print_r($all_css);*/
+        $all_css = $this->getModel('cssjs')->get_css();
+        print_r($all_css);
         die();
     }
 }
