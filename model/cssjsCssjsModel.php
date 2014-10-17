@@ -284,7 +284,7 @@ class cssjsCssjsModel extends cssjsCssjsModel_Parent
                             $this->getHelper('debug')->missing_param(array(
                                 'type'       => $type,
                                 'param_name' => 'src'
-                            ), debug_backtrace());
+                            ), debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
                         }
                         die();
                     }
