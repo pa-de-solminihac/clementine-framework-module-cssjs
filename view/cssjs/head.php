@@ -14,26 +14,26 @@ foreach ($all_css as $css) {
         echo $css . "\n";
     }
 }
-
 // chargement des js
 $all_js = $this->getModel('cssjs')->get_js();
 foreach ($all_js as $js) {
     if (is_array($js)) {
 ?>
-        <script
-			type="text/javascript"
-			src="<?php echo $js['src']; ?>"
-			<?php echo (isset($js['async'])) ? 'async' : ''; ?>
-			<?php echo (isset($js['defer'])) ? 'defer' : ''; ?>></script>
+        <script type="text/javascript" <?php
+$attrs = array('src', 'async', 'defer');
+foreach ($attrs as $attr) {
+    if (!empty($foot[$attr])) {
+        echo ' ' . $attr . '="' . $foot[$attr] . '" ';
+    }
+}
+?>></script>
 <?php
     } else {
         echo $js . "\n";
     }
 }
-
 // chargement des scripts du head
 $all_heads = $this->getModel('cssjs')->get_heads();
 foreach ($all_heads as $head) {
     echo $head . "\n";
 }
-?>
