@@ -22,8 +22,8 @@ foreach ($all_js as $js) {
         <script type="text/javascript" <?php
 $attrs = array('src', 'async', 'defer');
 foreach ($attrs as $attr) {
-    if (!empty($foot[$attr])) {
-        echo ' ' . $attr . '="' . $foot[$attr] . '" ';
+    if (!empty($js[$attr])) {
+        echo ' ' . $attr . '="' . $js[$attr] . '" ';
     }
 }
 ?>></script>
