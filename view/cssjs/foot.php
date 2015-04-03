@@ -1,7 +1,7 @@
 <?php
 // chargement des scripts du footer
 $all_foots = $this->getModel('cssjs')->get_foots();
-foreach ($all_foots as $foot) {
+foreach ($all_foots as $key => $foot) {
     if (is_array($foot)) {
 ?>
         <script type="text/javascript" <?php
@@ -11,7 +11,7 @@ foreach ($attrs as $attr) {
         echo ' ' . $attr . '="' . $foot[$attr] . '" ';
     }
 }
-?>></script>
+?> data-key="<?php echo $key; ?>" ></script>
 <?php
     } else {
         echo $foot . "\n";

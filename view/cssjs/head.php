@@ -1,14 +1,15 @@
 <?php
 // chargement des css
 $all_css = $this->getModel('cssjs')->get_css();
-foreach ($all_css as $css) {
+foreach ($all_css as $key => $css) {
     if (is_array($css)) {
 ?>
         <link
             rel="<?php echo (isset($css['rel'])) ? $css['rel'] : 'stylesheet'; ?>"
             type="<?php echo (isset($css['type'])) ? $css['type'] : 'text/css'; ?>"
             media="<?php echo (isset($css['media'])) ? $css['media'] : 'screen'; ?>"
-            href="<?php echo $css['src']; ?>" />
+            href="<?php echo $css['src']; ?>"
+            data-key="<?php echo $key; ?>" />
 <?php
     } else {
         echo $css . "\n";
@@ -16,7 +17,7 @@ foreach ($all_css as $css) {
 }
 // chargement des js
 $all_js = $this->getModel('cssjs')->get_js();
-foreach ($all_js as $js) {
+foreach ($all_js as $key => $js) {
     if (is_array($js)) {
 ?>
         <script type="text/javascript" <?php
@@ -26,7 +27,7 @@ foreach ($attrs as $attr) {
         echo ' ' . $attr . '="' . $js[$attr] . '" ';
     }
 }
-?>></script>
+?> data-key="<?php echo $key; ?>" ></script>
 <?php
     } else {
         echo $js . "\n";
