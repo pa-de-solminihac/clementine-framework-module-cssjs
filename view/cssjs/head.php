@@ -1,6 +1,6 @@
 <?php
 // chargement des css
-$all_css = $this->getModel('cssjs')->get_css();
+$all_css = Clementine::getModel('cssjs')->get_css();
 foreach ($all_css as $key => $css) {
     if (is_array($css)) {
 ?>
@@ -16,7 +16,7 @@ foreach ($all_css as $key => $css) {
     }
 }
 // chargement des js
-$all_js = $this->getModel('cssjs')->get_js();
+$all_js = Clementine::getModel('cssjs')->get_js();
 foreach ($all_js as $key => $js) {
     if (is_array($js)) {
 ?>
@@ -34,7 +34,7 @@ foreach ($attrs as $attr) {
     }
 }
 // chargement des scripts du head
-$all_heads = $this->getModel('cssjs')->get_heads();
+$all_heads = Clementine::getModel('cssjs')->get_heads();
 foreach ($all_heads as $head) {
     echo $head . "\n";
 }

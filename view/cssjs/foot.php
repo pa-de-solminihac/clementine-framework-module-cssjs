@@ -1,6 +1,6 @@
 <?php
 // chargement des scripts du footer
-$all_foots = $this->getModel('cssjs')->get_foots();
+$all_foots = Clementine::getModel('cssjs')->get_foots();
 foreach ($all_foots as $key => $foot) {
     if (is_array($foot)) {
 ?>
